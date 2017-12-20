@@ -1,4 +1,4 @@
-# Create DOM element
+# Create DOM element — 1ko
 
 [![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
 
