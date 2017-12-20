@@ -16,7 +16,7 @@ var el = CreateDOM({
   html: '<strong>is html</strong>',
   childrens: [document.querySelector('.my-element')],
   events: {
-    onclick: function() {
+    click: function() {
         console.log('clicked !!');
     }
   }

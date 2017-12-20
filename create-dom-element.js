@@ -44,7 +44,7 @@ function CreateDOM(opt) {
   if (typeof this.opt.events === 'object') {
 
     for (var key in this.opt.events) {
-      el[key] = this.opt.events[key];
+      el.addEventListener(key, this.opt.events[key], false); 
     }
   }
   
