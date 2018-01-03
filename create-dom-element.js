@@ -2,27 +2,31 @@
  *   Made with <3 by Jérôme Wohlschlegel
  =====================================================*/
 
-function CreateDOM(opt) {
+function CreateDOM(tag, opt) {
+  this.tag = tag || null;
   this.opt = opt || {};
+  this.el = false;
 
-  if (typeof this.opt.tag !== 'string') {
-    return false;
-  }
-  
   // Create element
-  var el = document.createElement(this.opt.tag);
+  if (typeof this.tag === 'string') {
+    this.el = document.createElement(this.tag);
+  } else if (typeof this.tag === 'object' && typeof this.tag.nodeName === 'string') {
+    this.el = this.tag;
+  } else {
+    return this.el;
+  }
   
   // Set attributes
   if (typeof this.opt.attr === 'object') {
 
     for (var key in this.opt.attr) {
-      el.setAttribute(key, this.opt.attr[key]);
+      this.el.setAttribute(key, this.opt.attr[key]);
     }
   }
 
   // Set html
   if (typeof this.opt.html !== 'undefined') {
-    el.innerHTML = this.opt.html;
+    this.el.innerHTML = this.opt.html;
   }
 
   // Set childrens
@@ -35,7 +39,7 @@ function CreateDOM(opt) {
     for (var i in this.opt.childrens) {
       
       if (this.opt.childrens[i] && typeof this.opt.childrens[i].nodeName === 'string') {
-        el.appendChild(this.opt.childrens[i]);
+        this.el.appendChild(this.opt.childrens[i]);
       }
     }
   }
@@ -44,9 +48,9 @@ function CreateDOM(opt) {
   if (typeof this.opt.events === 'object') {
 
     for (var key in this.opt.events) {
-      el.addEventListener(key, this.opt.events[key], false); 
+      this.el.addEventListener(key, this.opt.events[key], false); 
     }
   }
   
-  return el;
+  return this.el;
 }
