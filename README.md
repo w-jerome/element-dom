@@ -28,9 +28,11 @@ document.body.appendChild(el);
 
 ## Options
 
+`tag` : `string|element` if `string` the function create new element, if `element` the function update element
+
 - `attr` : `object` set custom attributes
-- `html` : `string` set the HTML syntax describing the element's descendants
-- `childrens` : `object|array` set childrens to element
+- `html` : `string` set the HTML syntax describing the string
+- `childrens` : `element|array` set childrens to element
 - `events` : `object` allows the assignment of event handlers on element
 
 ## License
