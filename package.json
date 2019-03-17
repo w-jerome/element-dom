@@ -1,0 +1,22 @@
+{
+  "name": "element-dom",
+  "version": "1.0.1",
+  "description": "Create HTML dom element",
+  "main": "src/element-dom.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w-jerome/element-dom.git"
+  },
+  "keywords": [
+    "element",
+    "dom",
+    "html",
+    "tag"
+  ],
+  "author": "Jérôme Wohlschlegel <jerome.wohlschlegel@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w-jerome/element-dom/issues"
+  },
+  "homepage": "https://github.com/w-jerome/element-dom#readme"
+}

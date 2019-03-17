@@ -4,23 +4,25 @@
 
 ## Installation
 
-`<script src="https://raw.githubusercontent.com/w-jerome/create-dom-element/master/create-dom-element.js"></script>`
+`npm install --save element-dom`
 
 ## Usage
 
 ```javascript
-var el = CreateDOM('div', {
+import dom from 'element-dom';
+
+var el = dom('div', {
   attr: {
     id: 'my-div',
     class: 'is-div',
   },
   html: 'This <strong>is html</strong>',
   childrens: [document.querySelector('.my-element')],
-  events: {
+  on: {
     click: function() {
         console.log('clicked !!');
     }
-  }
+  },
 });
 
 document.body.appendChild(el);
@@ -37,4 +39,4 @@ document.body.appendChild(el);
 
 ## License
 
-MIT, see [LICENSE](https://github.com/w-jerome/create-dom-element/blob/master/LICENSE) for details.
+MIT, see [LICENSE](https://github.com/w-jerome/element-dom/blob/master/LICENSE) for details.
