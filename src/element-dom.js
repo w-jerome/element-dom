@@ -19,7 +19,7 @@ function dom(tag, opt) {
   }
 
   // Set attributes
-  if (typeof this.opt.attr === 'object') {
+  if (typeof this.opt.attr === 'object' && this.opt.attr !== null) {
 
     for (var key in this.opt.attr) {
       this.el.setAttribute(key, this.opt.attr[key]);
@@ -27,8 +27,13 @@ function dom(tag, opt) {
   }
 
   // Set html
-  if (typeof this.opt.html !== 'undefined') {
+  if (typeof this.opt.html === 'string') {
     this.el.innerHTML = this.opt.html;
+  }
+
+  // Set text
+  if (typeof this.opt.text === 'string') {
+    this.el.textContent = this.opt.text;
   }
 
   // Set childrens
@@ -47,7 +52,7 @@ function dom(tag, opt) {
   }
 
   // Set events
-  if (typeof this.opt.on === 'object') {
+  if (typeof this.opt.on === 'object' && this.opt.on !== null) {
 
     for (var key in this.opt.on) {
       this.el.addEventListener(key, this.opt.on[key], false);
