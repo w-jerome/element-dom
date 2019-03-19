@@ -69,5 +69,3 @@ function dom(tag, opt, child) {
 
   return this.el;
 };
-
-module.exports = dom;
