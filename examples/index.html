@@ -17,7 +17,7 @@
       document.body.appendChild(el1);
 
       // Children 1
-      var el2 = dom('div', [
+      var el2 = dom('div', null, [
         dom('div'),
         dom('div'),
       ]);
@@ -25,7 +25,7 @@
       document.body.appendChild(el2);
 
       // Children 2
-      var el3 = dom('div', dom('div'));
+      var el3 = dom('div', null, dom('div'));
 
       document.body.appendChild(el3);
 
@@ -34,7 +34,7 @@
       var $child1 = document.querySelector('.child-1');
       var $child2 = document.querySelector('.child-2');
 
-      dom($parent, [
+      dom($parent, null, [
         $child2,
         $child1,
       ]);
@@ -66,9 +66,10 @@
 
       // Events
       var el7 = dom('div', {
+        text: 'click me',
         on: {
           click: function() {
-            console.log('clicked !!');
+            console.log('clicked !');
           },
         },
       });

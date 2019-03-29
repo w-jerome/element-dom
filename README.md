@@ -1,6 +1,4 @@
-
-
-# Create DOM element  —  1ko
+# Create and updates HTML dom element  —  1ko
 
 ## Installation
 
@@ -22,15 +20,15 @@ document.body.appendChild(el);
 
 ## Advanced usage
 
-The function accepts parameter which can be used to customize your element.
+The function accepts parameters that can be used to customize your element.
 
 ### Full options example
 
 ```javascript
 /**
- * @tag {string|element} set tag string or document element
- * @options {object|array|dom} set options, but if array or dom element set childrens
- * @childrens {object|dom} set childrens
+ * @tag {string|element} if it's a string, the function creates a new element, if it’s an element the function updates the dom element directly.
+ * @options {object} sets options
+ * @children {object|dom} sets children
  */
 
 dom('div', {
@@ -48,9 +46,9 @@ dom('div', {
 }, [dom('div'), dom('div')]);
 ```
 
-- `tag` : `string|element` if is `string`the function create new element, if is `element` the function update dom element directly.
-- `options` : `object|array|dom` if is `object` set options, but if `array` or `dom` set childrens.
-- `childrens` : `object|dom` set childrens.
+- `tag` : `string|element` if it's a string, the function creates a new element, if it’s an element the function updates the dom element directly.
+- `options` : `object` sets options
+- `children` : `object|dom` sets children
 
 ### Basic example
 
@@ -60,15 +58,15 @@ var $el1 = dom('div');
 document.body.appendChild($el1);
 ```
 
-### Childrens examples
+### Children examples
 
 ```javascript
-var $el = dom('div', dom('div'));
+var $el = dom('div', null, dom('div'));
 
 document.body.appendChild($el);
 ```
 ```javascript
-var $el = dom('div', [dom('div'), dom('div')]);
+var $el = dom('div', null, [dom('div'), dom('div')]);
 
 document.body.appendChild($el);
 ```
@@ -84,9 +82,9 @@ var $parent = document.querySelector('.parent');
 var $child1 = document.querySelector('.child-1');
 var $child2 = document.querySelector('.child-2');
 
-dom($parent, [
-  $child2,
-  $child1,
+dom($parent, null, [
+  $child2, // move top
+  $child1, // move bottom
 ]);
 ```
 and add class
@@ -96,18 +94,20 @@ var $child1 = document.querySelector('.child-1');
 var $child2 = document.querySelector('.child-2');
 
 dom($parent, {
-	attr: {
-		class: 'have-muted',
-	},
-},[
-  $child2,
-  $child1,
-]);
+  	attr: {
+  		class: 'have-muted',
+  	},
+  },
+  [
+    $child2,
+    $child1,
+  ]
+);
 ```
 
 ### Options
 
-#### `attr` : `object` set custom attributes
+#### `attr` : `object` sets customs attributes
 
 ```javascript
 dom('div', {
@@ -137,7 +137,8 @@ dom('div', {
 #### `on` : `object` allows the assignment of event handlers on element
 
 ```javascript
-dom($parent, {
+dom('div', {
+  text: 'click me',
   on: {
     click: function() {
         console.log('clicked !!');

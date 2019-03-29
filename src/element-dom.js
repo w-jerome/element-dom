@@ -19,14 +19,6 @@ function dom(tag, opt, child) {
     return this.el;
   }
 
-  if (Array.isArray(this.opt)) {
-    this.child = this.opt;
-    this.opt = {};
-  } else if (typeof this.opt === 'object' && typeof this.opt.nodeName === 'string') {
-    this.child = [this.opt];
-    this.opt = {};
-  }
-
   // Set attributes
   if (typeof this.opt.attr === 'object' && this.opt.attr !== null) {
 
@@ -58,7 +50,7 @@ function dom(tag, opt, child) {
     this.child = [this.child];
   }
 
-  if (typeof this.child === 'object' && Array.isArray(this.child)) {
+  if (Array.isArray(this.child)) {
 
     for (var i in this.child) {
       if (this.child[i] && typeof this.child[i].nodeName === 'string') {
