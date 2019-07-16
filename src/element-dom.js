@@ -7,6 +7,7 @@ function dom(tag, opt, child) {
   this.opt = opt || {};
   this.child = child || [];
   this.el = null;
+  this.attr_boolean = ['async', 'autofocus', 'autoplay', 'challenge', 'checked', 'compact', 'contenteditable', 'controls', 'default', 'defer', 'disabled', 'formNoValidate', 'frameborder', 'hidden', 'ismap', 'loop', 'multiple', 'muted', 'nohref', 'noresize', 'noshade', 'novalidate', 'nowrap', 'open', 'readonly', 'required', 'reversed', 'scoped', 'scrolling', 'seamless', 'selected', 'sortable', 'itemscope', 'nomodule', 'typemustmatch'];
 
   // Create element
   if (typeof this.tag === 'string') {
@@ -23,6 +24,12 @@ function dom(tag, opt, child) {
   if (typeof this.opt.attr === 'object' && this.opt.attr !== null) {
 
     for (var key in this.opt.attr) {
+      if (typeof this.opt.attr[key] === 'boolean' && this.attr_boolean.indexOf(key) > -1) {
+        if (this.opt.attr[key]) {
+          this.el.setAttribute(key, '');
+        }
+        continue;
+      }
       this.el.setAttribute(key, this.opt.attr[key]);
     }
   }
