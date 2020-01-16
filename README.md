@@ -1,4 +1,4 @@
-# Create and updates HTML dom element  —  1ko
+# Create and updates HTML dom element  —  2ko
 
 ## Installation
 
@@ -6,7 +6,7 @@
 
 or
 
-`<script src="https://github.com/w-jerome/element-dom/blob/master/dist/element-dom.min.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/w-jerome/element-dom/dist/element-dom.min.js"></script>`
 
 ## Usage
 
@@ -60,6 +60,7 @@ document.body.appendChild($el1);
 
 ### Children examples
 
+#### Basic
 ```javascript
 var $el = dom('div', null, dom('div'));
 
@@ -70,6 +71,7 @@ var $el = dom('div', null, [dom('div'), dom('div')]);
 
 document.body.appendChild($el);
 ```
+#### Move children
 You can manipulate the dom
 ```html
 <div class="parent">
@@ -102,6 +104,26 @@ dom($parent, {
     $child2,
     $child1,
   ]
+);
+```
+
+#### Async children
+
+```javascript
+dom('div', {
+    text: 'Async waiting…',
+  },
+  ($element) => {
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Async loaded!');
+      }, 2000);
+    }).then((value) => {
+      dom($element, {
+        text: value,
+      });
+    });
+  }
 );
 ```
 
