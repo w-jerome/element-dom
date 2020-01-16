@@ -2,11 +2,13 @@
 
 ## Installation
 
-`npm install --save element-dom`
-
+```console
+npm install --save element-dom
+```
 or
-
-`<script src="https://cdn.jsdelivr.net/gh/w-jerome/element-dom/dist/element-dom.min.js"></script>`
+```html
+<script src="https://cdn.jsdelivr.net/gh/w-jerome/element-dom/dist/element-dom.min.js"></script>
+```
 
 ## Usage
 
