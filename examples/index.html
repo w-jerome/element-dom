@@ -9,7 +9,7 @@
       <div class="child-2">child 2</div>
     </div>
 
-    <script src="https://github.com/w-jerome/element-dom/blob/master/dist/element-dom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/w-jerome/element-dom/dist/element-dom.min.js"></script>-
     <script>
       // Basic
       var el1 = dom('div');
@@ -75,6 +75,25 @@
       });
 
       document.body.appendChild(el7);
+
+      // Async
+      var el8 = dom('div', {
+          text: 'Async waiting…',
+        },
+        function(element) {
+          new Promise(function(resolve, reject) {
+            setTimeout(function() {
+              resolve('Async loaded!');
+            }, 2000);
+          }).then(function(value) {
+            dom(element, {
+              text: value,
+            });
+          });
+        }
+      );
+
+      document.body.appendChild(el8);
     </script>
   </body>
 </html>

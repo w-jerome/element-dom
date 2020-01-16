@@ -53,15 +53,21 @@ function dom(tag, opt, child) {
   }
 
   // Set child
-  if (typeof this.child === 'object' && typeof this.child.nodeName === 'string') {
+  if ((typeof this.child === 'object' && typeof this.child.nodeName === 'string') || typeof this.child === 'function') {
     this.child = [this.child];
   }
 
   if (Array.isArray(this.child)) {
 
-    for (var i in this.child) {
-      if (this.child[i] && typeof this.child[i].nodeName === 'string') {
-        this.el.appendChild(this.child[i]);
+    for (var key in this.child) {
+      if (!this.child[key]) {
+        continue;
+      }
+
+      if (typeof this.child[key].nodeName === 'string') {
+        this.el.appendChild(this.child[key]);
+      } else if (typeof this.child[key] === 'function') {
+        this.child[key](this.el);
       }
     }
   }
