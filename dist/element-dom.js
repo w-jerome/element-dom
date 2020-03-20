@@ -57,7 +57,8 @@ function dom(tag, opt, child) {
     this.child = [this.child];
   }
 
-  if (Array.isArray(this.child)) {
+  if (Array.isArray(this.child) && this.child.length) {
+    var fragment = document.createDocumentFragment();
 
     for (var key in this.child) {
       if (!this.child[key]) {
@@ -65,11 +66,13 @@ function dom(tag, opt, child) {
       }
 
       if (typeof this.child[key].nodeName === 'string') {
-        this.el.appendChild(this.child[key]);
+        fragment.appendChild(this.child[key]);
       } else if (typeof this.child[key] === 'function') {
         this.child[key](this.el);
       }
     }
+
+    this.el.appendChild(fragment);
   }
 
   return this.el;
