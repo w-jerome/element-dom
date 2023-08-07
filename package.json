@@ -1,8 +1,7 @@
 {
   "name": "element-dom",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "description": "Create and updates HTML dom element",
-  "main": "src/element-dom.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/w-jerome/element-dom.git"
@@ -18,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/w-jerome/element-dom/issues"
   },
-  "homepage": "https://github.com/w-jerome/element-dom#readme"
+  "homepage": "https://github.com/w-jerome/element-dom#readme",
+  "type": "module",
+  "types": "types/element-dom.d.ts",
+  "main": "src/esm/element-dom.js",
+  "exports": {
+    ".": {
+      "import": "src/esm/element-dom.js",
+      "require": "src/cjs/element-dom.js"
+    }
+  }
 }
