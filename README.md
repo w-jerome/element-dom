@@ -1,11 +1,13 @@
-# Create and updates HTML dom element  —  2ko
+# Create and updates HTML dom element — 1ko
 
 ## Installation
 
 ```console
 npm install --save element-dom
 ```
+
 or
+
 ```html
 <script src="https://cdn.jsdelivr.net/gh/w-jerome/element-dom/dist/element-dom.min.js"></script>
 ```
@@ -28,83 +30,70 @@ The function accepts parameters that can be used to customize your element.
 
 ```javascript
 /**
- * @tag {string|element} if it's a string, the function creates a new element, if it’s an element the function updates the dom element directly.
- * @options {object} sets options
- * @children {object|dom} sets children
+ * The `dom` function is a utility function in Javascript that creates and manipulates DOM elements
+ *
+ * @param {string|HTMLElement} element The `element` parameter can be either a string (e.g., 'div', 'span', 'p') or an DOM HTMLElement object
+ * @param {DomOptions} [options] The `options` parameter is an optional object that represents the properties of the html element created
+ * @param {HTMLElement|HTMLElement[]|NodeList} [children] - The `children` parameter is an optional parameter for adding children to the dom element
+ * @param {Function} [onAfterAppend] - The `onAfterAppend` parameter is a callback function that will be called after the element and its children have been appended to the DOM. It takes the element as its only argument
+ *
+ * @returns the created or provided HTMLElement with the specified attributes, text, html, children, and event listeners
  */
-
 dom('div', {
-  attr: {
-    id: 'my-div',
-    class: 'is-div',
-  },
-  html: 'This <strong>is html</strong>',
-  text: 'This is text',
-  on: {
-    click: function() {
-        console.log('clicked !!');
+    attr: {
+      id: 'my-div',
+      class: 'is-div',
+    },
+    html: 'This <strong>is html</strong>',
+    text: 'This is text',
+    on: {
+      click() {
+        console.log('Click !');
+      },
     },
   },
-}, [dom('div'), dom('div')]);
-```
-
-- `tag` : `string|element` if it's a string, the function creates a new element, if it’s an element the function updates the dom element directly.
-- `options` : `object` sets options
-- `children` : `object|dom` sets children
-
-### Basic example
-
-```javascript
-var $el1 = dom('div');
-
-document.body.appendChild($el1);
+  [
+    dom('div'),
+    dom('div'),
+  ],
+  (element) => {
+    console.log('Element created !')
+  },
+);
 ```
 
 ### Children examples
 
 #### Basic
-```javascript
-var $el = dom('div', null, dom('div'));
 
-document.body.appendChild($el);
-```
 ```javascript
-var $el = dom('div', null, [dom('div'), dom('div')]);
-
-document.body.appendChild($el);
+dom('div', undefined, dom('div'));
+dom('div', undefined, [dom('div'), dom('div')]);
+dom('div', undefined, document.querySelectorAll('.children'));
 ```
+
 #### Move children
-You can manipulate the dom
+
 ```html
 <div class="parent">
   <div class="child-1">child 1</div>
   <div class="child-2">child 2</div>
 </div>
 ```
-```javascript
-var $parent = document.querySelector('.parent');
-var $child1 = document.querySelector('.child-1');
-var $child2 = document.querySelector('.child-2');
 
-dom($parent, null, [
-  $child2, // move top
-  $child1, // move bottom
-]);
-```
-and add class
 ```javascript
-var $parent = document.querySelector('.parent');
-var $child1 = document.querySelector('.child-1');
-var $child2 = document.querySelector('.child-2');
+var parent = document.querySelector('.parent');
+var child1 = document.querySelector('.child-1');
+var child2 = document.querySelector('.child-2');
 
-dom($parent, {
-  	attr: {
-  		class: 'have-muted',
-  	},
+dom(parent, {
+    attr: {
+      class: 'have-muted',
+    },
   },
   [
-    $child2,
-    $child1,
+    child2, // move top
+    child1, // move bottom
   ]
 );
 ```
@@ -112,21 +101,16 @@ dom($parent, {
 #### Async children
 
 ```javascript
-dom('div', {
-    text: 'Async waiting…',
-  },
-  ($element) => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('Async loaded!');
-      }, 2000);
-    }).then((value) => {
-      dom($element, {
-        text: value,
-      });
-    });
-  }
-);
+dom('ul', undefined, undefined, async (element) => {
+  const myApi = await fetch('https://cat-fact.herokuapp.com/facts');
+  const data = await myApi.json();
+
+  dom(element, undefined, data.map(item => {
+    return dom('li', {
+      text: item.text,
+    })
+  }));
+});
 ```
 
 ### Options
@@ -138,7 +122,7 @@ dom('div', {
   attr: {
     'class': 'is-div',
     'style': 'display: none;',
-    'aria-hidden': false,
+    'aria-hidden': true,
   },
 });
 ```
@@ -150,6 +134,7 @@ dom('div', {
   html: 'This <strong>is html</strong>',
 });
 ```
+
 #### `text` : `string` set text
 
 ```javascript
@@ -164,13 +149,9 @@ dom('div', {
 dom('div', {
   text: 'click me',
   on: {
-    click: function() {
-        console.log('clicked !!');
+    click() {
+      console.log('Click !');
     },
   },
 });
 ```
-
-## License
-
-MIT, see [LICENSE](https://github.com/w-jerome/element-dom/blob/master/LICENSE) for details.

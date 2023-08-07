@@ -1,8 +1,16 @@
-/*=====================================================
- *   Made with <3 by Jérôme Wohlschlegel
- =====================================================*/
+// Made with <3 by Jérôme Wohlschlegel
 
-function dom(element, options, children, onAfterAppend) {
+/**
+ * The `dom` function is a utility function in Javascript that creates and manipulates DOM elements
+ *
+ * @param {string|HTMLElement} element The `element` parameter can be either a string (e.g., 'div', 'span', 'p') or an DOM HTMLElement object
+ * @param {DomOptions} [options] The `options` parameter is an optional object that represents the properties of the html element created
+ * @param {HTMLElement|HTMLElement[]|NodeList} [children] - The `children` parameter is an optional parameter for adding children to the dom element
+ * @param {Function} [onAfterAppend] - The `onAfterAppend` parameter is a callback function that will be called after the element and its children have been appended to the DOM. It takes the element as its only argument
+ *
+ * @returns the created or provided HTMLElement with the specified attributes, text, html, children, and event listeners
+ */
+export default function dom(element, options, children, onAfterAppend) {
   if (typeof element !== 'string' && !(element instanceof HTMLElement)) {
     throw new Error('The \'element\' parameter must be a \'string\' or an \'HTMLElement\'');
   }
