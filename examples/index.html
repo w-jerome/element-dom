@@ -4,45 +4,72 @@
     <title>Examples</title>
   </head>
   <body>
-    <div class="parent">
-      <div class="child-1">child 1</div>
-      <div class="child-2">child 2</div>
+    <div class="example-1">
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/w-jerome/element-dom/dist/element-dom.min.js"></script>
-    <!-- <script src="../src/element-dom.js"></script> -->
+    <div class="example-2">
+    </div>
 
-    <script>
-      // Basic
+    <div class="example-3">
+    </div>
+
+    <div class="example-4">
+      <div class="parent">
+        <div class="child-1">child 1</div>
+        <div class="child-2">child 2</div>
+      </div>
+    </div>
+
+    <div class="example-5">
+    </div>
+
+    <div class="example-6">
+    </div>
+
+    <div class="example-7">
+    </div>
+
+    <div class="example-8">
+    </div>
+
+    <div class="example-9">
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/gh/w-jerome/element-dom/dist/element-dom.min.js"></script> -->
+
+    <script type="module">
+      import dom from '../src/element-dom.js';
+
+      // Example 1 - Basic
       var el1 = dom('div');
 
-      document.body.appendChild(el1);
+      document.querySelector('.example-1').appendChild(el1);
 
-      // Children 1
-      var el2 = dom('div', null, [
+      // Example 2 - Children 1
+      var el2 = dom('div', undefined, [
         dom('div'),
         dom('div'),
       ]);
 
-      document.body.appendChild(el2);
+      document.querySelector('.example-2').appendChild(el2);
 
-      // Children 2
-      var el3 = dom('div', null, dom('div'));
+      // Example 3 - Children 2
+      var el3 = dom('div', undefined, dom('div'));
 
-      document.body.appendChild(el3);
+      document.querySelector('.example-3').appendChild(el3);
 
-      // Children 3
-      var $parent = document.querySelector('.parent');
-      var $child1 = document.querySelector('.child-1');
-      var $child2 = document.querySelector('.child-2');
+      // Example 4 - Children 3
+      var $parent = document.querySelector('.example-4 .parent');
+      var $child1 = document.querySelector('.example-4 .child-1');
+      var $child2 = document.querySelector('.example-4 .child-2');
 
-      dom($parent, null, [
+      dom($parent, undefined, [
         $child2,
         $child1,
       ]);
 
-      // Attributes
-      var el4 = dom('div', {
+      // Example 5 - Attributes
+      var el5 = dom('div', {
         attr: {
           'class': 'is-div',
           'style': 'display: none;',
@@ -50,52 +77,47 @@
         },
       });
 
-      document.body.appendChild(el4);
+      document.querySelector('.example-5').appendChild(el5);
 
-      // HTML
-      var el5 = dom('div', {
+      // Example 6 - HTML
+      var el6 = dom('div', {
         html: 'This <strong>is html</strong>',
       });
 
-      document.body.appendChild(el5);
+      document.querySelector('.example-6').appendChild(el6);
 
-      // Text
-      var el6 = dom('div', {
+      // Example 7 - Text
+      var el7 = dom('div', {
         text: 'This is text',
       });
 
-      document.body.appendChild(el6);
+      document.querySelector('.example-7').appendChild(el7);
 
-      // Events
-      var el7 = dom('div', {
+      // Example 8 - Events
+      var el8 = dom('div', {
         text: 'click me',
         on: {
-          click: function() {
+          click() {
             console.log('clicked !');
           },
         },
       });
 
-      document.body.appendChild(el7);
+      document.querySelector('.example-8').appendChild(el8);
 
-      // Async
-      var el8 = dom('div', {
-          text: 'Async waiting…',
-        },
-        function(element) {
-          new Promise(function(resolve, reject) {
-            setTimeout(function() {
-              resolve('Async loaded!');
-            }, 2000);
-          }).then(function(value) {
-            dom(element, {
-              text: value,
-            });
-          });
-        }
-      );
+      // Example 9 - Async
+      var el9 = dom('ul', undefined, undefined, async (element) => {
+        const myApi = await fetch('https://cat-fact.herokuapp.com/facts');
+        const data = await myApi.json();
 
-      document.body.appendChild(el8);
+        dom(element, undefined, data.map(item => {
+          return dom('li', {
+            text: item.text,
+          })
+        }));
+      });
+
+      document.querySelector('.example-9').appendChild(el9);
     </script>
   </body>
 </html>
